@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <script src="https://kit.fontawesome.com/a076d05399.js"></script>-->
+
+    <title>website</title>
+<!--    <link rel="stylesheet" type="text/css" href="../static/css/style.css">-->
+<!-- 引入 css文件 -->
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename = 'css/style.css') }}">
+
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <div class="shell">
+        <!-- <a href="#" class="box"><i class="iconfont icon-liebiao"></i><span>list</span></a> -->
+        <a href="" class="box">
+            <img src="../static/pic/icon_1.png" alt="Icon" class="icon">
+            <span>Hot Insights</span>
+        </a>
+        <a href="#" class="box">
+          <img src="../static/pic/icon_3.png" alt="Icon" class="icon">
+          <span>Correlation Analysis</span>
+        </a>
+        <a href="#" class="box">
+          <img src="../static/pic/icon_2.png" alt="Icon" class="icon">
+          <span>Knowledge graph base</span>
+        </a>
+        <a href="#" class="box">
+          <img src="../static/pic/icon_4.png" alt="Icon" class="icon">
+          <span>human-computer interaction
+          </span>
+        </a>
+    </div>
+
+
+    <div class="wrapper">
+        <nav>
+          <input type="checkbox" id="show-search">
+          <input type="checkbox" id="show-menu">
+          <label for="show-menu" class="menu-icon"><i class="fas fa-bars"></i></label>
+          <div class="content">
+
+          <div class="logo"><a href="#"><img src="../static/pic/logo.png" alt="Icon" class="icon_1">Ducks Power</a ></div>
+            <ul class="links">
+              <!-- <li><a href="#">All Industries</a></li>
+              <li><a href="#">All Companies</a></li> -->
+              <li>
+                <a href="#" class="desktop-link">All Industries</a>
+                <input type="checkbox" id="show-industries">
+<!--                <label for="show-features">Industries</label>-->
+                <ul>
+                  <li><a href="#">Drop Menu 1</a></li>
+                  <li><a href="#">Drop Menu 2</a></li>
+                  <li><a href="#">Drop Menu 3</a></li>
+                  <li><a href="#">Drop Menu 4</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#" class="desktop-link">All Companies</a>
+                <input type="checkbox" id="show-companies">
+<!--                <label for="show-services">Companies</label>-->
+                <ul>
+                  <li><a href="#">Drop Menu 1</a></li>
+                  <li><a href="#">Drop Menu 2</a></li>
+                  <li><a href="#">Drop Menu 3</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">Period</a>
+                <ul>
+                    <li>
+                        <input class="date-input" type="text" placeholder="YYYY">
+                        <span>/</span>
+                        <input class="date-input" type="text" placeholder="MM">
+                        <span>/</span>
+                        <input class="date-input" type="text" placeholder="DD">
+                        <span style="margin: 2 2px;">-</span>
+                        <input class="date-input" type="text" placeholder="YYYY">
+                        <span>/</span>
+                        <input class="date-input" type="text" placeholder="MM">
+                        <span>/</span>
+                        <input class="date-input" type="text" placeholder="DD">
+                    </li> <!-- 结束列表项 -->
+                </ul>
+            </li>
+            </ul>
+          </div>
+
+<!--          <label for="show-search" class="search-icon"><i class="fas fa-search"></i></label>-->
+<!--          <form action="#" class="search-box">-->
+<!--            <input type="text" placeholder="Type Something to Search..." required>-->
+<!--            <button type="submit" class="go-icon"><i class="fas fa-long-arrow-alt-right"></i></button>-->
+<!--          </form>-->
+        </nav>
+      </div>
+
+
+    <div class="hot_sights" id="hot_sights">
+
+        <div id="news-list">
+        <!-- 生成的新闻项将动态添加到这里 -->
+        </div>
+
+        <script>
+
+            const newsData = [];
+            const newData = {};
+            fetch('./static/news_hot.json')
+                .then(response => response.text())
+                .then(data => {
+                    // 从总字典中提取所需字段组成新的字典
+                    const dic_data = JSON.parse(data);
+                    console.log(dic_data)
+                    const newsList = document.getElementById('news-list');
+                    let index = 0;
+
+                    // 根据数据生成新闻项
+                    dic_data.forEach(item => {
+                        const newsItem = document.createElement('div');
+                        newsItem.classList.add('news-item');
+                        index=index + 1;
+                        newsItem.setAttribute('data-id', index);
+                        newsItem.innerHTML = `
+                            <img src="../static/pic/hot.png" alt="Hot Icon" class="hot-icon">
+                            <h2><a href="http://127.0.0.1:5000/news?id=${index}">${item.title}</a></h2>
+                            <p><strong>Time:</strong> ${item.time}</p>
+                            <p>${item.content}</p>
+                        `;
+                        newsList.appendChild(newsItem);
+                    });
+                })
+<!--                .catch(error => console.error('Error fetching data:', error));-->
+        </script>
+
+    </div>
+
+
+
+</body>
+
+</html>
+

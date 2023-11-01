@@ -1,0 +1,22 @@
+﻿[
+  {
+    "content": "Apple’s MacBook Pro lineup and colorful iMacs just got even faster.\nAlthough unveiling a new processor may not sound sexy, it will serve as the backbone to Apple’s latest products, enabling faster speeds and more capabilities than ever. For example, Apple said the M3 speeds are now up to 2.5x faster than on the M1 family of chips, and its core processing performance is up to 50% faster. The chips are built with 3 nanometer technology, which can support advanced graphics and artificial intelligence.\n“It will bring a whole new level of graphics to the Mac,” an Apple executive said during the event. “They are the most advanced chips ever built for a personal computer.",
+    "time": "2023.11.1",
+    "title": "Apple unveils its fastest iMac and MacBook Pro models yet"
+  },
+  {
+    "content": "Lest you think a space black MacBook Pro was the biggest news of the week, Apple is back with an all-new version of AirTag firmware. Still think the black aluminum laptop is more exciting? Fair. Nevertheless, new AirTag firmware awaits.\nThe latest AirTag firmware, pushed out today, brings us to version 2.0.61, or build 2A61. That’s up from version 2.0.36 last year.\nApple hasn’t yet disclosed what changes occur with these firmware updates. We have to imagine that they fix bugs and improve performance..",
+    "time": "2023.11.1",
+    "title": "Apple just started rolling out new AirTag firmware"
+  },
+  {
+    "content": "NEW YORK (Reuters) -Shares of Nvidia Corp dropped by about 5% to a near five-month low on Tuesday following a Wall Street Journal report that the artificial intelligence (AI) giant may be forced to cancel up to $5 billion worth of advanced chip orders to China in compliance with new U.S. government restrictions.Nvidia was notified last week that AI chip orders scheduled for delivery next year to major Chinese technology companies, including Alibaba Group, TikTok owner-ByteDance and Baidu, are subject to the latest export restrictions announced by the U.S. Commerce Department, the Wall Street Journal reported, citing people familiar with the matter.",
+    "time": "2023.11.1",
+    "title": "Why Nvidia (NASDAQ: NVDA) Could Lose Billions in AI Chip Orders"
+  },
+  {
+    "content": "Nvidia has trained its NeMo large language model (LLM) on internal data to help chip designers with tasks related to chip design, including answering general questions about chip design, summarizing bug documentation, and writing scripts for EDA tools. Nvidia’s chief scientist, Bill Dally, presented the LLM, dubbed ChipNeMo, in his keynote presentation at the International Conference on Computer-Aided Design today.\n“The goal here is to make our designers more productive,” Dally told EE Times in an interview prior to the event. “If we even got a couple percent improvement in productivity, this would be worth it. And our goals are actually to do quite a bit better than that.”",
+    "time": "2023.11.1",
+    "title": "Nvidia Trains LLM on Chip Design"
+  }
+]

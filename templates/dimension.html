@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dimension</title>
+    <link rel="stylesheet" href="../static/css/dimension.css">
+</head>
+
+<body>
+    <div class="container">
+     <h1 class="guide">Please choose the dimensions you are intereted in!</h1>  
+        <div class="box">
+            <span></span>
+            <div class="content">
+                <h2>Fact Interpreter</h2>
+                <p>1. News Summarization</p>
+                <p>2. Related Entity</p>
+                <p>3. Opportunities and Positive Information</p>
+                <p>4. Sentiment Analyze</p>
+                <p>5. Explanation of related professional terms</p>
+                <p style="font-weight: bold;">Options:</p>
+                <div>
+                    <input type="checkbox" id="option1" name="option1" value="Option1" class="checkbox">
+                    <label for="option1">Technological innovation</label>
+                </div>
+                
+                <div>
+                    <input type="checkbox" id="option2" name="option2" value="Option2" class="checkbox">
+                    <label for="option2">ESG information</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="box">
+            <span></span>
+            <div class="content">
+                <h2>Impact Assessor</h2>
+                <p>1. Policy</p>
+                <p>2. industry</p> 
+                <p>3. Public Opinion</p>
+                <p style="font-weight: bold;">Options:</p>
+                <input type="checkbox" id="option3" name="option3" value="Option3" class="checkbox">
+                <label for="option3">Seceurity and Privacy</label>              
+            </div>
+        </div>
+    </div>
+    <button id="nextButton">Next</button>
+
+    <script>
+
+        // 获取 nextButton 元素
+        const submitButton = document.getElementById('nextButton');
+
+        // 监听点击事件
+        submitButton.addEventListener('click', function() {
+            // 在点击事件发生后跳转到后端的 'home' 页面
+            window.location.href = '/home';
+        });
+    </script>
+
+</body>
+
+</html>

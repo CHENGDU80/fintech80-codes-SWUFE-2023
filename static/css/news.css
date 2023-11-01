@@ -1,0 +1,308 @@
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+
+body {
+    background-color: rgba(233, 233, 233, 0.545);
+    display: flex;
+    justify-content: space-evenly;
+    height: 100vh;
+    align-items: center;
+    background-image: url('../pic/back_1.png');
+    background-size: cover;
+}
+
+.icon1{
+    width:35px;
+    height:35px;
+    right:10%;
+}
+
+.icon2{
+    width:35px;
+    height:35px;
+    right:10%;
+}
+
+/* 导航栏参数 */
+.shell {
+    width: 20px;
+    min-width: 60px;
+    height: 70%;
+    display: flex;
+    position:absolute;
+    left:2%;
+    bottom: 10%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(17, 24, 39);
+    border-radius: 10px;
+    transition: .3s;
+    overflow: hidden;
+    z-index: 1000;
+    box-shadow: 5px 5px 10px 1px #526366;
+}
+
+/* 每栏具体参数 */
+.box {
+    display: block;
+    height: 20%;
+    width: 85%;
+    margin: 9px;
+    border-radius: 5px;
+    position: relative;
+    transition: .3s;
+    color: rgb(160, 160, 175);
+}
+
+.icon {
+    margin-right: 0px;
+    width: 35px;
+    height: 35px;
+    position:absolute;
+    bottom: 35%;
+    left: 13%;
+}
+
+/* 对.box内的span元素的样式 */
+.box span{
+    position: absolute;
+    top: 40%;
+    left: 75px;
+    font: 500 16px '';
+    opacity: 0;
+    transition: .1s;
+}
+
+.icon, .box span {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* 鼠标悬停时的动态效果 */
+.shell:hover{
+    width: 220px;
+}
+.box:hover{
+    background-color: rgb(55, 65, 81);
+}
+.box:hover icon{
+    opacity: 1;
+}
+.shell:hover span{
+    opacity: 1;
+}
+.box:hover{
+    color: #fff;
+}
+
+.main-content {
+    width: 60%;
+    height: 780px; /* 你可以根据需要调整这个值 */
+    overflow-y: auto;
+    position: absolute;
+    right: 30%;
+    top: 4%;
+}
+
+.part_1 {
+    padding: 20px;
+    border-bottom: 1px solid #a5abc18e; /* 为新闻项目添加底部边框 */
+    font-size: smaller;
+    background-color: #f2f3f6;
+    border-radius: 13px;
+}
+
+.news-title{
+    text-align: center;
+    padding: 15px;
+}
+
+.news-time{
+    /* margin-left: auto; */
+    font-size: 12px;
+    color: grey;
+    padding: 10px;
+    text-align: center;
+}
+
+.main-content p{
+    line-height: 30px;
+    text-indent: 2em;
+    font-size: 15px;
+}
+
+.part_2{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: #f2f6f6;
+    border-radius: 13px;
+    border-bottom: 1px solid #bbbabaa4;
+    padding: 20px;
+}
+
+.part_5 {
+    /* display: none; */
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: #edeceb;
+    border-radius: 13px;
+    border-bottom: 1px solid #bbbabaa4;
+    padding: 20px;
+}
+
+.part2-title{
+    text-align: center;
+}
+
+.fig1{
+height:100%;
+margin-left:15%;
+}
+
+.part_2 h3{
+    margin-top: 2%;
+    margin-bottom: 1%;
+}
+
+#explanation ul {
+    list-style-type: decimal;  /* 使用数字作为列表标记 */
+    /* padding-left: 30px;        添加左边距 */
+    list-style-position: inside;
+    padding-left: 0;
+}
+
+#explanation li {
+    margin-bottom: 10px;      /* 为每个列表项添加底部外边距 */
+    text-indent: -1em; /* 使用负的文本缩进将文本向左移动 */
+    padding-left: 1em; /* 为列表项添加左内边距来抵消上面的缩进 */
+}
+
+
+.right-column{
+    /* background-color: rgb(221, 221, 221); */
+    width: 29%;
+    right: 0%;
+    height: 780px;
+    overflow-y: auto;
+    position: absolute;
+}
+
+.part_3{
+    height: 35%;
+    border-bottom: 1.5px solid #a8a8a8;
+    padding: 10px;
+    margin-right: 1.5%;
+}
+
+.part_4 {
+    padding: 10px;
+}
+
+.part_4 p{
+    line-height: 30px;
+    text-indent: 2em;
+    font-size: 15px;
+}
+
+.part4-title{
+    margin-top: 2%;
+    text-align: center;
+    margin-bottom: 4%;
+}
+
+.part_4 h3{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.parts_three{
+    background-color: #f2f6f5;
+    border-radius: 13px;
+    padding: 3%;
+}
+
+.part_one{
+    margin-top: 2%;
+    background-color: #f2f2f6;
+    border-radius: 13px;
+    padding: 3%;
+}
+
+/* 模态框 */
+.modal {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 60%;
+    background-color: rgba(255,255,255,0.9);  /* 设置半透明白色背景 */
+    padding: 20px 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);  /* 添加阴影 */
+    border-top: 1px solid #ddd;  /* 添加边框 */
+    border-radius: 15px;
+    margin-bottom: 1.5%;
+    margin-left: 18%;
+}
+
+.modal-content {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+}
+
+#feedback{
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+}
+
+input[type="text"] {
+    width: 75%;  /* 输入框宽度 */
+    height: 13%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;  /* 圆角 */
+    margin-right: 0%;
+    font-size: 16px;
+}
+
+input[type="text"]:focus {
+    border-color: #2483ac; /* 这里是蓝色，您可以根据需要更改颜色值 */
+    box-shadow: 0 0 3px #2483ac; /* 为选中的输入框添加轻微的阴影，增强视觉效果 */
+    outline: none; /* 移除默认的轮廓线 */
+}
+
+button {
+    padding: 10px 20px;  /* 按钮大小 */
+    background-color: rgb(17, 24, 39);  /* 蓝色背景 */
+    color: #FFF;  /* 白色文本 */
+    border: none;
+    border-radius: 5px;  /* 圆角 */
+    cursor: pointer;  /* 手指图标 */
+    margin-left: 5%;
+    font-weight: bold;
+    width:10%;
+}
+
+
+button:hover {
+    background-color: #5c6570;  /* 更深的蓝色 */
+}
+
+.modal .close {
+    right: 12px; /* 根据需要调整这个值 */
+    position: absolute;
+    top: 5px; /* 如果需要，也可以调整顶部距离 */
+}

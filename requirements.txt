@@ -1,0 +1,6 @@
+fastapi==0.104.1
+Flask==3.0.0
+flask_mysqldb==2.0.0
+langchain==0.0.327
+openai==0.28.1
+pandas==2.1.2

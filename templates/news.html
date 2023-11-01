@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Display</title>
+    <link rel="stylesheet" href="../static/css/news.css">
+</head>
+<body>
+
+
+    <!-- 导航栏 -->
+    <div class="shell">
+        <a href="" class="box">
+            <img src="../static/pic/icon_1.png" alt="Icon" class="icon">
+            <span>Hot Insights</span>
+        </a>
+        <a href="" class="box">
+          <img src="../static/pic/icon_3.png" alt="Icon" class="icon">
+          <span>Correlation Analysis</span>
+        </a>
+        <a href="#" class="box">
+          <img src="../static/pic/icon_2.png" alt="Icon" class="icon">
+          <span>Knowledge graph base</span>
+        </a>
+        <a href="#" class="box">
+          <img src="../static/pic/icon_4.png" alt="Icon" class="icon">
+          <span>human-computer interaction
+          </span>
+        </a>
+    </div>
+
+    <script>
+
+<!--        const urlParams = new URLSearchParams(window.location.search);-->
+<!--        const newsId = urlParams.get('id');-->
+<!--        newsId = 1;-->
+<!--        const news = [];-->
+<!--         fetch('newsdata.json')-->
+<!--                .then(response => response.text())-->
+<!--                .then(data => {-->
+<!--                   const news = data[newsId - 1]; // 因为数组索引从 0 开始，而新闻 ID 从 1 开始-->
+<!--                   console.log(news)-->
+<!--                })-->
+<!--                .catch(error => console.error('Error fetching data:', error));-->
+
+    </script>
+
+    <div class="main-content" id="main-content">
+        <div class="part_1" id="part_1">
+            <h1 id="news-title" class="news-title"></h1>
+            <p id="news-time" class="news-time"></p>
+            <p id="news-content" class="news-content"></p>
+        </div>
+        <div class="part_2" id="part_2">
+<!--            <h2 id="part2-title" class="part2-title">Break Down Analyze</h2>-->
+            <h2 href="#" class="part2-title" id="part2-title">
+                <img src="../../static/pic/breakdown.png" alt="Icon" class="icon1">
+                <span>Break Down Analyze</span>
+            </h2>
+            <h3 id="title_1" class="title_1">News Summarization</h3>
+            <p id="news-summarization"></p>
+            <h3 id="title_2">Related Entity</h3>
+            <p id="related-entity"></p>
+            <h3 id="title_3">Opportunities and Positive Information</h3>
+            <p id="opportunities">
+            <h3 id="title_4">Sentiment Analyze</h3>
+            <p id="sentiment-analyze">
+            <h3 id="title_5">Explanation of related professional terms</h3>
+            <p id="explanation" class="explanation">
+        </div>
+        <div class="part_5" id="part_5">
+            <h3 id="pctitle">human-pc</h3>
+            <p id="human_pc"></p>
+        </div>
+    </div>
+
+    <div class="right-column" id="right-column">
+        <div class="part_3" id="part_3">
+            <h3 id="part3-title"></h3>
+            <img src="../static/pic/fig1.png" class="fig1">
+        </div>
+
+        <div class="part_4" id="part_4">
+            <h2 href="#" class="part4-title" id="part4-title">
+                <img src="../../static/pic/3part.png" alt="Icon" class="icon2">
+                <span>Impact Speculation</span>
+            </h2>
+            <div class="parts_three">
+                <h3 id="title_6">Policy</h3>
+                <p id="policy"></p>
+                <h3 id="title_7">industry</h3>
+                <p id="industry"></p>
+                <h3 id="title_8">Public Opinion</h3>
+                <p id="public-opinion"></p>
+            </div>
+            <div class="part_one">
+                <h3 id="title_9">Analyze</h3>
+                <p id="Analyze"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-content">
+            <form action="http://127.0.0.1:5000/human_pc" method="post" id="feedback">
+                <input type="text" name="text" id="input-txt" placeholder="Please input content here...">
+                <button id="submitButton" type ="submit">Submit</button>
+                <span class="close">&times;</span>
+            </form>
+
+        </div>
+    </div>
+
+
+
+
+    <script>
+        fetch('./static/news_result.json')
+            .then(response => response.json())
+            .then(data => {
+                // 使用数据填充HTML
+                document.getElementById('news-title').textContent = data.title;
+                document.getElementById('news-time').textContent = data.time;
+                document.getElementById('news-content').textContent = data['news'];
+                document.getElementById('news-summarization').textContent = data['News Summarization'];
+                document.getElementById('related-entity').textContent = data['Related Entity'];
+                document.getElementById('opportunities').textContent = data['Opportunities and Positive Information'];
+                document.getElementById('sentiment-analyze').textContent = data['Sentiment'];
+
+                // 对Explanation of related professional terms进行处理
+                let explanationText = data['Explanation of related professional terms'];
+                let items = explanationText.split(/\d+\./).filter(Boolean);
+                let listHtml = "<ul>" + items.map(item => `<li>${item.trim()}</li>`).join("") + "</ul>";
+                document.getElementById('explanation').innerHTML = listHtml;
+                document.getElementById('policy').textContent = data['policy'];
+                document.getElementById('industry').textContent = data['industry'];
+                document.getElementById('public-opinion').textContent = data['Public Opinion'];
+                document.getElementById('Analyze').textContent = data['analyze'];
+
+            })
+            .catch(error => {
+<!--                console.error('Error fetching the JSON data:', error);-->
+            });
+
+            // 获取模态框元素
+            var modal = document.getElementById("myModal");
+            console.log(1)
+            // 获取链接元素，以打开模态框
+            var btn = document.querySelector(".box:nth-child(4)"); // 选择"human-computer interaction"链接
+            console.log(2)
+            // 获取 <span> 元素，以关闭模态框
+            var span = document.getElementsByClassName("close")[0];
+            console.log(3)
+            // 点击链接时打开模态框
+            btn.onclick = function() {
+                modal.style.display = "block";
+            }
+            // 点击 <span> (x) 时关闭模态框
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+            // 在用户点击模态框内容之外的区域时，关闭模态框
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+<!--            const canvas = document.getElementById('kg-show');-->
+<!--            const ctx = canvas.getContext('2d');-->
+<!--            const img = new Image();-->
+<!--            img.onload = function() {-->
+<!--                canvas.width = img.width;-->
+<!--                canvas.height = img.height;-->
+<!--                ctx.drawImage(img, 0, 0);-->
+<!--            };-->
+    <!--        img.src = 'kg.jpg'; -->
+
+    </script>
+
+    <script>
+         fetch('./static/human_pc.json')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('human_pc').textContent = data;
+            })
+            console.log(data.text)
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    </script>
+
+
+
+</body>
+</html>

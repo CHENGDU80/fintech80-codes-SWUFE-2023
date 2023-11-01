@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <script src="https://kit.fontawesome.com/a076d05399.js"></script>-->
+
+    <title>website</title>
+<!--    <link rel="stylesheet" type="text/css" href="../static/css/style.css">-->
+<!-- 引入 css文件 -->
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename = 'css/style.css') }}">
+
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <div class="shell">
+        <!-- <a href="#" class="box"><i class="iconfont icon-liebiao"></i><span>list</span></a> -->
+        <a href="/hot" class="box">
+            <img src="../static/pic/icon_1.png" alt="Icon" class="icon">
+            <span>Hot Insights</span>
+        </a>
+        <a href="#" class="box" id="mergerAnalysis">
+          <img src="../static/pic/icon_3.png" alt="Icon" class="icon">
+          <span>Correlation Analysis</span>
+        </a>
+        <a href="#" class="box" id="knowledgeBaseButton">
+          <img src="../static/pic/icon_2.png" alt="Icon" class="icon">
+          <span>Knowledge graph base</span>
+        </a>
+        <a href="" class="box">
+          <img src="../static/pic/icon_4.png" alt="Icon" class="icon">
+          <span>human-computer interaction
+          </span>
+        </a>
+    </div>
+
+    <!-- 模态框结构 -->
+    <div class="modal" id="fileModal">
+      <div class="modal-content">
+          <span class="close-btn" id="closeModal">&times;</span>
+
+          <div class="modal_tag">
+            <span class="modal_tag-content">Policy</span>
+            <div class="expand-box">- Point A: Policy Influence\n - Edge 1: Has a large impact\n - Edge 2: High sustainability\n\n- Point B: Industry Influence\n - Edge 1: Has a large impact\n - Edge 2: Short duration\n\n- Point C: Public Opinion News\n - Edge 1: Has a large impact\n - Edge 2: Very short duration\n - Edge 3: Highly volatile\n</div>
+            <input type="text" class="tag-input" style="display:none;">
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">x</button>
+        </div>
+
+          <div class="modal_tag">
+            <span class="modal_tag-content">Echo Chamber Effect</span>
+            <div class="expand-box">- Point A: Echo Chamber Effect\n - Edge 1: Definition\n - Point B: Tendency of digital algorithms to show users news that aligns with their existing beliefs\n - Edge 2: Consequence\n - Point C: Creation of echo chambers\n - Point D: Contribution to polarization</div>
+            <input type="text" class="tag-input" style="display:none;">
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">x</button>
+        </div>
+
+          <div class="modal_tag">
+            <span class="modal_tag-content">Constant exposure to negative news</span>
+            <div class="expand-box">- Point A: Echo Chamber Effect\n - Edge 1: Definition\n - Point B: Tendency of digital algorithms to show users news that aligns with their existing beliefs\n - Edge 2: Consequence\n - Point C: Creation of echo chambers\n - Point D: Contribution to polarization</div>
+            <input type="text" class="tag-input" style="display:none;">
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">x</button>
+        </div>
+
+          <h3>Submit Files</h3>
+          <input type="file" id="fileInput">
+          <label for="fileInput" class="custom-file-label">Choose file</label>
+          <button id="uploadButton">Submit</button>
+      </div>
+    </div>
+
+
+
+    <div class="wrapper">
+        <nav>
+          <input type="checkbox" id="show-search">
+          <input type="checkbox" id="show-menu">
+          <label for="show-menu" class="menu-icon"><i class="fas fa-bars"></i></label>
+          <div class="content">
+
+          <div class="logo"><a href="#"><img src="../static/pic/logo.png"  class="icon_1">Ducks Power</a></div>
+            <ul class="links">
+              <!-- <li><a href="#">All Industries</a></li>
+              <li><a href="#">All Companies</a></li> -->
+              <li>
+                <a href="#" class="desktop-link">All Industries</a>
+                <input type="checkbox" id="show-industries">
+<!--                <label for="show-features">Industries</label>-->
+                <ul>
+                  <li><a href="#">Drop Menu 1</a></li>
+                  <li><a href="#">Drop Menu 2</a></li>
+                  <li><a href="#">Drop Menu 3</a></li>
+                  <li><a href="#">Drop Menu 4</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#" class="desktop-link">All Companies</a>
+                <input type="checkbox" id="show-companies">
+<!--                <label for="show-services">Companies</label>-->
+                <ul>
+                  <li><a href="#">Drop  Menu 1</a></li>
+                  <li><a href="#">Drop Menu 2</a></li>
+                  <li><a href="#">Drop Menu 3</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">Period</a>
+                <ul>
+                    <li>
+                        <input class="date-input" type="text" placeholder="YYYY">
+                        <span>/</span>
+                        <input class="date-input" type="text" placeholder="MM">
+                        <span>/</span>
+                        <input class="date-input" type="text" placeholder="DD">
+                        <span style="margin: 2 2px;">-</span>
+                        <input class="date-input" type="text" placeholder="YYYY">
+                        <span>/</span>
+                        <input class="date-input" type="text" placeholder="MM">
+                        <span>/</span>
+                        <input class="date-input" type="text" placeholder="DD">
+                    </li> <!-- 结束列表项 -->
+                </ul>
+            </li>
+            </ul>
+          </div>
+
+        </nav>
+      </div>
+
+
+    <div class="hot_sights" id="hot_sights">
+
+        <div id="news-list">
+        <!-- 生成的新闻项将动态添加到这里 -->
+        </div>
+    </div>
+
+
+
+
+    <script>
+      // 知识库
+      document.getElementById('knowledgeBaseButton').addEventListener('click', function() {
+          var modal = document.getElementById('fileModal');
+          modal.style.display = "block";
+      });
+
+      document.getElementById('closeModal').addEventListener('click', function() {
+          var modal = document.getElementById('fileModal');
+          modal.style.display = "none";
+      });
+
+      // 当用户点击模态框外的地方，模态框也关闭
+      window.onclick = function(event) {
+          var modal = document.getElementById('fileModal');
+          if (event.target === modal) {
+              modal.style.display = "none";
+          }
+      }
+      // 模态框细节
+      document.addEventListener('DOMContentLoaded', function() {
+        // 删除按钮点击事件
+        document.querySelectorAll('.delete-btn').forEach(function(button) {
+          button.addEventListener('click', function() {
+            button.parentElement.remove();
+          });
+        });
+
+        // 编辑按钮点击事件
+        document.querySelectorAll('.edit-btn').forEach(function(button) {
+          button.addEventListener('click', function() {
+            const tagContent = button.previousElementSibling.previousElementSibling;
+            const input = button.previousElementSibling;
+
+            // 切换显示状态
+            tagContent.style.display = tagContent.style.display === 'none' ? '' : 'none';
+            input.style.display = input.style.display === 'none' ? '' : 'none';
+
+            if (input.style.display !== 'none') {
+              input.value = tagContent.textContent;
+              input.focus();
+            } else {
+              tagContent.textContent = input.value;
+            }
+          });
+        });
+
+        // 当输入框失去焦点时，更新标签内容并隐藏输入框
+        document.querySelectorAll('.tag-input').forEach(function(input) {
+          input.addEventListener('blur', function() {
+            const tagContent = input.previousElementSibling;
+            tagContent.textContent = input.value;
+            tagContent.style.display = '';
+            input.style.display = 'none';
+          });
+        });
+      });
+
+        $(document).ready(function() {
+      $('.modal_tag-content').on('click', function() {
+          var expandBox = $(this).siblings('.expand-box');
+          if (expandBox.is(':visible')) {
+              expandBox.hide();
+          } else {
+              expandBox.show();
+          }
+      });
+
+          // 当点击页面其他地方时，隐藏.expand-box
+          $(document).on('click', function(event) {
+              if (!$(event.target).closest('.modal_tag-content').length) {
+                  $('.expand-box').hide();
+              }
+          });
+      });
+      </script>
+
+</body>
+
+        <script>
+            const newsData = [];
+            const newData = {};
+            fetch('./static/newsdata.json')
+                .then(response => response.text())
+                .then(data => {
+                    // 从总字典中提取所需字段组成新的字典
+                    const dic_data = JSON.parse(data);
+                    console.log(dic_data)
+                    const newsList = document.getElementById('news-list');
+                    let index = 0;
+
+                    // 根据数据生成新闻项
+                    dic_data.forEach(item => {
+                        const newsItem = document.createElement('div');
+                        newsItem.classList.add('news-item');
+                        index=index + 1;
+                        newsItem.setAttribute('data-id', index);
+                        newsItem.innerHTML = `
+                            <h2><a href="http://127.0.0.1:5000/news?id=${index}">${item.title}</a></h2>
+                            <p><strong>Time:</strong> ${item.time}</p>
+                            <p>${item.content}</p>
+                        `;
+                        newsList.appendChild(newsItem);
+                    });
+                })
+<!--                .catch(error => console.error('Error fetching data:', error));-->
+        </script>
+
+        <script>
+                document.getElementById('mergerAnalysis').addEventListener('click', function(event) {
+                    event.preventDefault();  // 阻止默认的链接点击行为
+
+                  // 首先处理news-item的勾选框
+                  var newsItems = document.querySelectorAll('.news-item');
+                  if (newsItems.length && newsItems[0].querySelector('.news-checkbox')) {
+                      newsItems.forEach(function(item) {
+                          var checkbox = item.querySelector('.news-checkbox');
+                          if (checkbox) {
+                              item.removeChild(checkbox);
+                          }
+                      });
+                  } else if (newsItems.length) {
+                      newsItems.forEach(function(item) {
+                          var checkbox = document.createElement('input');
+                          checkbox.type = 'checkbox';
+                          checkbox.className = 'news-checkbox';
+                          item.insertBefore(checkbox, item.firstChild);
+                      });
+                  }
+
+                  var analyzeButton = document.getElementById('analyzeButton');
+
+                  if (!analyzeButton) {
+                      analyzeButton = document.createElement('button');
+                      analyzeButton.id = 'analyzeButton';
+                      analyzeButton.innerHTML = 'Analyze';
+
+                      analyzeButton.addEventListener('click', function() {
+                          // window.location.href = 'news.html';
+                          window.open('http://127.0.0.1:5000/relate', '_blank');
+                      });
+
+                      document.body.appendChild(analyzeButton);
+                  } else {
+                      analyzeButton.remove();
+                  }
+              });
+        </script>
+
+    <script>
+          // 知识库
+          document.getElementById('knowledgeBaseButton').addEventListener('click', function() {
+              var modal = document.getElementById('fileModal');
+              modal.style.display = "block";
+          });
+
+          document.getElementById('closeModal').addEventListener('click', function() {
+              var modal = document.getElementById('fileModal');
+              modal.style.display = "none";
+          });
+
+          // 当用户点击模态框外的地方，模态框也关闭
+          window.onclick = function(event) {
+              var modal = document.getElementById('fileModal');
+              if (event.target === modal) {
+                  modal.style.display = "none";
+              }
+          }
+          // 模态框细节
+          document.addEventListener('DOMContentLoaded', function() {
+            // 删除按钮点击事件
+            document.querySelectorAll('.delete-btn').forEach(function(button) {
+              button.addEventListener('click', function() {
+                button.parentElement.remove();
+              });
+            });
+
+            // 编辑按钮点击事件
+            document.querySelectorAll('.edit-btn').forEach(function(button) {
+              button.addEventListener('click', function() {
+                const tagContent = button.previousElementSibling.previousElementSibling;
+                const input = button.previousElementSibling;
+
+                // 切换显示状态
+                tagContent.style.display = tagContent.style.display === 'none' ? '' : 'none';
+                input.style.display = input.style.display === 'none' ? '' : 'none';
+
+                if (input.style.display !== 'none') {
+                  input.value = tagContent.textContent;
+                  input.focus();
+                } else {
+                  tagContent.textContent = input.value;
+                }
+              });
+            });
+
+            // 当输入框失去焦点时，更新标签内容并隐藏输入框
+            document.querySelectorAll('.tag-input').forEach(function(input) {
+              input.addEventListener('blur', function() {
+                const tagContent = input.previousElementSibling;
+                tagContent.textContent = input.value;
+                tagContent.style.display = '';
+                input.style.display = 'none';
+              });
+            });
+          });
+
+            $(document).ready(function() {
+          $('.modal_tag-content').on('click', function() {
+              var expandBox = $(this).siblings('.expand-box');
+              if (expandBox.is(':visible')) {
+                  expandBox.hide();
+              } else {
+                  expandBox.show();
+              }
+          });
+
+          // 当点击页面其他地方时，隐藏.expand-box
+          $(document).on('click', function(event) {
+              if (!$(event.target).closest('.modal_tag-content').length) {
+                  $('.expand-box').hide();
+              }
+          });
+      });
+
+      </script>
+      <script>
+                     // 实现Hot Insights筛选功能
+            // 当页面加载完毕后
+                window.addEventListener('DOMContentLoaded', function() {
+                  // 获取 "Hot Insights" 按钮
+                  const hotInsightsButton = document.querySelector('.box img[src="../static/pic/hot.png"]').parentElement;
+
+                  // 为按钮添加点击事件
+                  hotInsightsButton.addEventListener('click', function(event) {
+                    event.preventDefault(); // 阻止默认行为
+
+                    // 遍历所有的 news-item 元素
+                    const newsItems = document.querySelectorAll('.news-item');
+                    newsItems.forEach(function(newsItem) {
+                      // 检查是否已经有 hot.png 图标
+                      const hotIcon = newsItem.querySelector('img[src="../static/pic/hot.png"]');
+
+                      if (hotIcon) {
+                        // 如果有，则移除它
+                        hotIcon.remove();
+                      } else {
+                        // 如果没有，则添加它
+                        const hotImg = document.createElement('img');
+                        hotImg.src = "../static/pic/hot.png";
+                        hotImg.style.position = "absolute";
+                        hotImg.style.top = "0";
+                        hotImg.style.right = "0";
+                        newsItem.style.position = "relative"; // 确保 news-item 是相对定位，这样 hotImg 可以相对于它定位
+                        newsItem.appendChild(hotImg);
+                        hotImg.classList.add('hot-icon');
+                      }
+                    });
+                  });
+                });
+      </script>
+</html>
+

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Welcome back</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('../static/pic/ba.png');
+            background-size: cover;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            width: 380px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .container h2 {
+            margin-bottom: 20px;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .container p {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 25px;
+            text-align: center;
+            width: 90%;
+        }
+
+        .container input[type="email"] {
+            width: 90%;
+            height: 30px;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.05);
+            font-size: 14px;
+        }
+
+        .container input[type="password"] {
+            width: 90%;
+            height: 30px;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.05);
+            font-size: 14px;
+        }
+
+        .container button {
+            width: 100%;
+            height:50px;
+            padding: 12px;
+            background-color: rgba(212, 211, 211, 0.189);
+            color: rgb(49, 54, 56);
+            font-size: 15px;
+            border-top: rgba(225, 225, 225, 0.5) 1px solid;
+            border-left: rgba(225, 225, 225, 0.5) 1px solid;
+            border-bottom: none;
+            border-right: none;
+            border-radius: 6px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: background-color 0.3s ease;
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container button:hover {
+            background-color: #a4a3a3a0;
+        }
+
+        .or-section {
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .or-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0%;
+            right: 0%;
+            height: 1px;
+            background-color: #ddd;
+            z-index: 1;
+        }
+
+        .or-text {
+            background-color: #fff;
+            z-index: 2;
+            position: relative;
+            padding: 0 15px;
+            font-size: 12px;
+            left: 40%;
+            /* right: 50%; */
+            color: #888;
+        }
+
+        .container a {
+            color: #a2a2a2;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .container a:hover {
+            color: #4d4d4d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Welcome back</h2>
+    <input type="email" id="emailInput" placeholder="Email address">
+    <input type="password" placeholder="Password">
+    <button id="submitButton" style="background-color: rgba(186, 187, 189, 0.543); font-weight:bold">Continue</button>
+    <p>Already have an account? <a href="login.html">Log in</a></p>
+    <div class="or-section">
+        <span class="or-text">OR</span>
+    </div>
+
+<button class="auth-button"; style= " margin-bottom: 10px;">
+    <i class="fab fa-google"></i> Continue with Google
+</button>
+
+<!-- Microsoft Button -->
+<button class="auth-button"; style= " margin-bottom: 10px;">
+    <i class="fab fa-microsoft"></i> Continue with Microsoft Account
+</button>
+
+<!-- Apple Button -->
+<button class="auth-button"; style=" margin-bottom: 10px;">
+    <i class="fab fa-apple"></i> Continue with Apple
+</button>
+
+    <p style="margin-top: 20px;"><a href="#">Terms of use</a> | <a href="#">Privacy policy</a></p>
+</div>
+
+</body>
+
+<script>
+    // 获取 submitButton 元素
+        const submitButton = document.getElementById('submitButton');
+
+        // 监听点击事件
+        submitButton.addEventListener('click', function() {
+            // 在点击事件发生后跳转到后端的 'industry' 页面
+            window.location.href = '/industry';
+        });
+
+    /**
+     * 设置cookie的函数
+     * @param {string} name - cookie的名称
+     * @param {string} value - cookie的值
+     * @param {number} days - cookie的有效期（以天为单位）
+     */
+    function setCookie(name, value, days) {
+        // 创建一个新的Date对象
+        const date = new Date();
+
+        // 设置date的时间，使其在当前时间基础上增加指定的天数
+        // 这是通过将天数转换为毫秒并添加到当前时间来实现的
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+
+        // 将date对象转换为UTC字符串格式，以便将其用作cookie的过期日期
+        const expires = "expires=" + date.toUTCString();
+
+        // 设置cookie，包括其名称、值、过期时间和路径
+        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
+</script>
+</html>
+

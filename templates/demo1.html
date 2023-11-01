@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>News Browser</title>
+    <style>
+        /* 可自定义样式 */
+        .news-item {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>News Browser</h1>
+
+    <!-- 根据数据生成新闻条目 -->
+    <div id="news-list"></div>
+
+    <script>
+        // 模拟新闻数据
+        const newsData = [
+            { title: 'News 1', time: '2023-10-25', content: 'Content 1...' },
+            { title: 'News 2', time: '2023-10-26', content: 'Content 2...' },
+            { title: 'News 3', time: '2023-10-27', content: 'Content 3...' },
+            { title: 'News 4', time: '2023-10-28', content: 'Content 4...' }
+            // 添加更多新闻数据...
+        ];
+
+        const newsList = document.getElementById('news-list');
+
+        // 根据数据生成新闻条目
+        newsData.forEach(item => {
+            const newsItem = document.createElement('div');
+            newsItem.classList.add('news-item');
+            newsItem.innerHTML = `
+                <h2>${item.title}</h2>
+                <p><strong>Time:</strong> ${item.time}</p>
+                <p>${item.content}</p>
+            `;
+            newsList.appendChild(newsItem);
+        });
+    </script>
+</body>
+</html>

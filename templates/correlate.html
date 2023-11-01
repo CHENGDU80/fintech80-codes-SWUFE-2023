@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Display</title>
+    <link rel="stylesheet" href="../static/css/news.css">
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <div class="shell">
+        <a href="" class="box">
+            <img src="../static/pic/icon_1.png" alt="Icon" class="icon">
+            <span>Hot Insights</span>
+        </a>
+        <a href="" class="box">
+          <img src="../static/pic/icon_3.png" alt="Icon" class="icon">
+          <span>Correlation Analysis</span>
+        </a>
+        <a href="" class="box">
+          <img src="../static/pic/icon_2.png" alt="Icon" class="icon">
+          <span>Knowledge graph base</span>
+        </a>
+        <a href="" class="box">
+          <img src="../static/pic/icon_4.png" alt="Icon" class="icon">
+          <span>human-computer interaction
+          </span>
+        </a>
+    </div>
+
+    <div class="main-content" id="main-content">
+        <div class="part_1" id="part_1">
+            <h1 id="news-title" class="news-title"></h1>
+            <p id="news-time" class="news-time"></p>
+            <p id="news-content" class="news-content"></p>
+        </div>
+        <div class="part_2" id="part_2">
+            <h1 id="news-title1" class="news-title"></h1>
+            <p id="news-time1" class="news-time"></p>
+            <p id="news-content1" class="news-content"></p>
+        </div>
+    </div>
+
+    <div class="right-column" id="right-column">
+        <div class="part_3" id="part_3">
+            <h3 id="part3-title">K-G Picture</h3>
+            <canvas class="kg-show" id="kg-show"></canvas>
+        </div>
+        <div class="part_4" id="part_4">
+            <h2 id="part4-title" class="part4-title">Conclusion</h2>
+            <div id="part_5" class="part_5">
+                <h3 id="title_1">Correlation</h3>
+                <p id="Correlation"></p>
+            </div>
+            <div id="part_6" class="part_6">
+                <h3 id="title_2">Tracking</h3>
+                <p id="Tracking"></p>
+            </div>
+        </div>
+
+        <script>
+        fetch('./static/news_2.json')
+                .then(response => response.json())
+                .then(data => {
+                    // 使用数据填充HTML
+                    console.log(data)
+                    document.getElementById('news-title').textContent = data[0].title;
+                    document.getElementById('news-time').textContent = data[0].time;
+                    document.getElementById('news-content').textContent = data[0].content;
+                    document.getElementById('news-title1').textContent = data[1].title;
+                    document.getElementById('news-time1').textContent = data[1].time;
+                    document.getElementById('news-content1').textContent = data[1].content;
+                })
+                .catch(error => {
+    <!--                console.error('Error fetching the JSON data:', error);-->
+                });
+        </script>
+
+        <script>
+        fetch('./static/correlation.json')
+            .then(response => response.json())
+            .then(data => {
+                // 使用数据填充HTML
+                console.log(data)
+                document.getElementById('Correlation').textContent = data.Correlation;
+                document.getElementById('Tracking').textContent = data.tracking;
+            })
+            .catch(error => {
+<!--                console.error('Error fetching the JSON data:', error);-->
+            });
+
+
+        </script>
+</body>
+</html>

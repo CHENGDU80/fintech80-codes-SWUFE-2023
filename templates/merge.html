@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename = 'css/style.css') }}">
+    <title>website</title>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <div class="shell">
+        <!-- <a href="#" class="box"><i class="iconfont icon-liebiao"></i><span>list</span></a> -->
+        <a href="/hot" class="box">
+            <img src="../static/pic/icon_1.png" alt="Icon" class="icon">
+            <span>Hot Insights</span>
+        </a>
+        <a href="#" class="box">
+          <img src="../static/pic/icon_3.png" alt="Icon" class="icon">
+          <span>Correlation Analysis</span>
+        </a>
+        <a href="#" class="box">
+          <img src="../static/pic/icon_2.png" alt="Icon" class="icon">
+          <span>Knowledge graph base</span>
+        </a>
+        <a href="" class="box">
+          <img src="../static/pic/icon_4.png" alt="Icon" class="icon">
+          <span>human-computer interaction
+          </span>
+        </a>
+    </div>
+
+    <!-- 模态框结构 -->
+    <div class="modal" id="fileModal">
+      <div class="modal-content">
+          <span class="close-btn" id="closeModal">&times;</span>
+
+          <div class="modal_tag">
+            <span class="modal_tag-content">Policy</span>
+            <div class="expand-box">- Point A: Policy Influence\n - Edge 1: Has a large impact\n - Edge 2: High sustainability\n\n- Point B: Industry Influence\n - Edge 1: Has a large impact\n - Edge 2: Short duration\n\n- Point C: Public Opinion News\n - Edge 1: Has a large impact\n - Edge 2: Very short duration\n - Edge 3: Highly volatile\n</div>
+            <input type="text" class="tag-input" style="display:none;">
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">x</button>
+        </div>
+
+          <div class="modal_tag">
+            <span class="modal_tag-content">Echo Chamber Effect</span>
+            <div class="expand-box">- Point A: Echo Chamber Effect\n - Edge 1: Definition\n - Point B: Tendency of digital algorithms to show users news that aligns with their existing beliefs\n - Edge 2: Consequence\n - Point C: Creation of echo chambers\n - Point D: Contribution to polarization</div>
+            <input type="text" class="tag-input" style="display:none;">
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">x</button>
+        </div>
+
+          <div class="modal_tag">
+            <span class="modal_tag-content">Constant exposure to negative news</span>
+            <div class="expand-box">- Point A: Echo Chamber Effect\n - Edge 1: Definition\n - Point B: Tendency of digital algorithms to show users news that aligns with their existing beliefs\n - Edge 2: Consequence\n - Point C: Creation of echo chambers\n - Point D: Contribution to polarization</div>
+            <input type="text" class="tag-input" style="display:none;">
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">x</button>
+        </div>
+
+          <h3>Submit Files</h3>
+          <input type="file" id="fileInput">
+          <label for="fileInput" class="custom-file-label">Choose file</label>
+          <button id="uploadButton">Submit</button>
+      </div>
+    </div>
+
+    <script>
+      // 知识库
+      document.getElementById('knowledgeBaseButton').addEventListener('click', function() {
+          var modal = document.getElementById('fileModal');
+          modal.style.display = "block";
+      });
+
+      document.getElementById('closeModal').addEventListener('click', function() {
+          var modal = document.getElementById('fileModal');
+          modal.style.display = "none";
+      });
+
+      // 当用户点击模态框外的地方，模态框也关闭
+      window.onclick = function(event) {
+          var modal = document.getElementById('fileModal');
+          if (event.target === modal) {
+              modal.style.display = "none";
+          }
+      }
+      // 模态框细节
+      document.addEventListener('DOMContentLoaded', function() {
+        // 删除按钮点击事件
+        document.querySelectorAll('.delete-btn').forEach(function(button) {
+          button.addEventListener('click', function() {
+            button.parentElement.remove();
+          });
+        });
+
+        // 编辑按钮点击事件
+        document.querySelectorAll('.edit-btn').forEach(function(button) {
+          button.addEventListener('click', function() {
+            const tagContent = button.previousElementSibling.previousElementSibling;
+            const input = button.previousElementSibling;
+
+            // 切换显示状态
+            tagContent.style.display = tagContent.style.display === 'none' ? '' : 'none';
+            input.style.display = input.style.display === 'none' ? '' : 'none';
+
+            if (input.style.display !== 'none') {
+              input.value = tagContent.textContent;
+              input.focus();
+            } else {
+              tagContent.textContent = input.value;
+            }
+          });
+        });
+
+        // 当输入框失去焦点时，更新标签内容并隐藏输入框
+        document.querySelectorAll('.tag-input').forEach(function(input) {
+          input.addEventListener('blur', function() {
+            const tagContent = input.previousElementSibling;
+            tagContent.textContent = input.value;
+            tagContent.style.display = '';
+            input.style.display = 'none';
+          });
+        });
+      });
+
+        $(document).ready(function() {
+      $('.modal_tag-content').on('click', function() {
+          var expandBox = $(this).siblings('.expand-box');
+          if (expandBox.is(':visible')) {
+              expandBox.hide();
+          } else {
+              expandBox.show();
+          }
+      });
+
+      // 当点击页面其他地方时，隐藏.expand-box
+      $(document).on('click', function(event) {
+          if (!$(event.target).closest('.modal_tag-content').length) {
+              $('.expand-box').hide();
+          }
+      });
+  });
+
+      </script>
+
+    <!-- 目录栏 -->
+    <div class="wrapper">
+        <nav class="menu">
+          <input type="checkbox" id="show-search">
+          <input type="checkbox" id="show-menu">
+          <label for="show-menu" class="menu-icon"><i class="fas fa-bars"></i></label>
+          <div class="content">
+          <div class="logo"><a href="#"><img src="logo.png" alt="Icon" class="icon_1">Ducks Power</a></div>
+            <ul class="links">
+              <!-- <li><a href="#">All Industries</a></li>
+              <li><a href="#">All Companies</a></li> -->
+              <li>
+                <a href="#" class="desktop-link">All Industries</a>
+                <input type="checkbox" id="show-industries">
+<!--                <label for="show-features">Industries</label>-->
+                <ul>
+                  <li><a href="#">Drop Menu 1</a></li>
+                  <li><a href="#">Drop Menu 2</a></li>
+                  <li><a href="#">Drop Menu 3</a></li>
+                  <li><a href="#">Drop Menu 4</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#" class="desktop-link">All Companies</a>
+                <input type="checkbox" id="show-companies">
+<!--                <label for="show-services">Companies</label>-->
+                <ul>
+                  <li><a href="#">Drop Menu 1</a></li>
+                  <li><a href="#">Drop Menu 2</a></li>
+                  <li><a href="#">Drop Menu 3</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">Period</a>
+                <ul>
+                    <li>
+                        <input class="date-input" type="text" placeholder="YYYY">
+                        <span>/</span>
+                        <input class="date-input" type="text" placeholder="MM">
+                        <span>/</span>
+                        <input class="date-input" type="text" placeholder="DD">
+                        <span style="margin: 2 2px;">-</span>
+                        <input class="date-input" type="text" placeholder="YYYY">
+                        <span>/</span>
+                        <input class="date-input" type="text" placeholder="MM">
+                        <span>/</span>
+                        <input class="date-input" type="text" placeholder="DD">
+                    </li> <!-- 结束列表项 -->
+                </ul>
+            </li>
+            </ul>
+          </div>
+          <!-- <label for="show-search" class="search-icon"><i class="fas fa-search"></i></label>
+          <form action="#" class="search-box">
+            <input type="text" placeholder="Type Something to Search..." required>
+            <button type="submit" class="go-icon"><i class="fas fa-long-arrow-alt-right"></i></button>
+          </form> -->
+        </nav>
+      </div>
+
+
+    <div class="hot_sights" id="hot_sights"> </div>
+<!--        <div class="news-item" id="news-item">-->
+<!--                <div class="news-header" id="news-header">-->
+<!--                  <span class="source">Negative</span>-->
+<!--                  <a href="news.html"  target="_blank">-->
+<!--                     Emerging-Market Companies at Risk With $400 Billion of Debt Due-->
+<!--                  </a>-->
+<!--                </div>-->
+<!--                <p class="news-content" id="news-content">-->
+<!--                  The news discusses the increasing difficulties faced by emerging-market companies due to rising global borrowing rates, which are at their highest since the financial crisis. This situation has halted refinancing opportunities for $400 billion worth of debt maturities due in the new year. As US Treasury yields reach 15-year highs, companies from developing nations have only managed to rollover a tenth of what they need. The situation is expected to worsen with another $300 billion worth of corporate bonds due in 2025...-->
+<!--                </p>-->
+<!--                <div class="news-footer" id="news-footer">-->
+<!--                    <span class="score" id="score">Recommondation:Yes</Recommondation:Yes></span>-->
+<!--                    <span class="time" id="time">Update Time | 2023-10-29 08:25</span>-->
+<!--                  <div class="tag-container">-->
+<!--                    <span class="tag" id="tag">收藏</span>-->
+<!--                    <span class="tag pink">收藏与关注</span>-->
+<!--                    <span class="tag">显卡及价格</span>-->
+<!--                    <span class="tag">其他社会组织</span>-->
+<!--                    <span class="tag">氢燃料车辆</span>-->
+<!--                    <span class="tag blue">核电趋势</span>-->
+<!--                    <span class="tag">立案调查</span>-->
+<!--                  </div>-->
+<!--                </div>-->
+
+</body>
+
+
+<script>
+  document.getElementById('mergerAnalysis').addEventListener('click', function(event) {
+      event.preventDefault();  // 阻止默认的链接点击行为
+
+      // 首先处理news-item的勾选框
+      var newsItems = document.querySelectorAll('.news-item');
+
+      if (newsItems.length && newsItems[0].querySelector('.news-checkbox')) {
+          newsItems.forEach(function(item) {
+              var checkbox = item.querySelector('.news-checkbox');
+              if (checkbox) {
+                  item.removeChild(checkbox);
+              }
+          });
+      } else if (newsItems.length) {
+          newsItems.forEach(function(item) {
+              var checkbox = document.createElement('input');
+              checkbox.type = 'checkbox';
+              checkbox.className = 'news-checkbox';
+              item.insertBefore(checkbox, item.firstChild);
+          });
+      }
+
+      var analyzeButton = document.getElementById('analyzeButton');
+
+      if (!analyzeButton) {
+          analyzeButton = document.createElement('button');
+          analyzeButton.id = 'analyzeButton';
+          analyzeButton.innerHTML = 'Analyze';
+
+          analyzeButton.addEventListener('click', function() {
+              // window.location.href = 'analyze.html';
+              window.open('analyze.html', '_blank');
+          });
+
+          document.body.appendChild(analyzeButton);
+      } else {
+          analyzeButton.remove();
+      }
+  });
+
+  const newsData = [];
+
+  fetch('data.json')
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          return response.json();
+      })
+      .then(data => {
+          const newData = {
+              title: data['title'],
+              time: data['time'],
+              sum: data['News Summarization'],
+              impact: data['Whether it has a greater impact'],
+          };
+
+          newsData.push(newData);
+
+          const newsList = document.getElementById('hot_sights');
+
+          newsData.forEach(item => {
+              const newsItem = document.createElement('div');
+              newsItem.classList.add('news-item');
+
+              const newsHeader = document.createElement('div');
+              newsHeader.classList.add('news-header');
+
+              const sourceSpan = document.createElement('span');
+              sourceSpan.classList.add('source');
+              sourceSpan.innerText = "Negative";
+
+              const titleLink = document.createElement('a');
+              titleLink.href = "news.html";
+              titleLink.innerText = item.title;
+              titleLink.target = "_blank";
+              // titleLink.id = "newsItem_" + someUniqueId; // 设置一个唯一ID，例如从数据中取得
+
+              newsHeader.appendChild(sourceSpan);
+              newsHeader.appendChild(titleLink);
+
+              const newsContent = document.createElement('p');
+              newsContent.classList.add('news-content');
+              newsContent.innerText = item.sum;
+
+              const newsFooter = document.createElement('div');
+              newsFooter.classList.add('news-footer');
+
+              const timeSpan = document.createElement('span');
+              timeSpan.classList.add('news-time');
+              timeSpan.textContent = `发布时间：${item.time}`;
+              newsFooter.appendChild(timeSpan);
+
+              const impactDiv = document.createElement('div');
+              impactDiv.classList.add('news-impact');
+              impactDiv.textContent = `是否产生较大影响：${item.impact}`;
+              newsFooter.appendChild(impactDiv);
+
+              newsItem.appendChild(newsHeader);
+              newsItem.appendChild(newsContent);
+              newsItem.appendChild(newsFooter);
+
+              newsList.appendChild(newsItem);
+          });
+      })
+      .catch(error => console.error('Error fetching data:', error));
+
+
+
+      // 选中文件显示
+      document.getElementById('fileInput').addEventListener('change', function(e) {
+      const fileName = e.target.files[0] ? e.target.files[0].name : "No file chosen";
+      document.querySelector('.custom-file-label').innerText = fileName;
+  });
+
+
+      // 前后传输
+      titleLink.addEventListener('click', function(event) {
+    event.preventDefault(); // 阻止默认行为
+
+    // 获取所点击的新闻标题控件的 ID
+    const clickedId = this.id;
+
+    // 导航到 news_test.html 并将 ID 作为查询参数传递
+    window.location.href = "news.html?id=" + clickedId;
+});
+
+  window.onerror = function(message, source, lineno, colno, error) {
+      console.error("错误信息：" + message, "来源：" + source, "行号：" + lineno, "列号：" + colno, "错误对象：" + error);
+  }
+
+  //  模态框
+  document.addEventListener('DOMContentLoaded', function() {
+  // 为每个编辑按钮添加点击事件
+  document.querySelectorAll('.edit-btn').forEach(function(button) {
+    button.addEventListener('click', function() {
+      const factDiv = button.parentElement;
+      const p = factDiv.querySelector('p');
+      const text = p.textContent;
+
+      p.innerHTML = `<input type="text" value="${text}">`;
+
+      button.textContent = '保存';
+      button.classList.remove('edit-btn');
+      button.classList.add('save-btn');
+
+      button.removeEventListener('click', arguments.callee);
+
+      // 为保存按钮添加点击事件
+      button.addEventListener('click', function() {
+        const input = p.querySelector('input');
+        p.textContent = input.value;
+
+        button.textContent = '编辑';
+        button.classList.remove('save-btn');
+        button.classList.add('edit-btn');
+
+        button.removeEventListener('click', arguments.callee);
+      });
+    });
+  });
+
+  // 为每个删除按钮添加点击事件
+  document.querySelectorAll('.delete-btn').forEach(function(button) {
+    button.addEventListener('click', function() {
+      button.parentElement.remove();
+    });
+  });
+});
+
+  </script>
+
+</html>
+

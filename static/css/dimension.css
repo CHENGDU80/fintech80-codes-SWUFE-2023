@@ -1,0 +1,220 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: consolas;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1d061a;
+    min-height: 100vh;
+    background-image: url('../pic/dimen_back.jpg');
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 40px 0px;
+}
+
+.container .box {
+    position: relative;
+    width: 320px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 30px;
+}
+
+.container .box span {
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.container .box span::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background-color: rgba(179, 189, 200, 0.131);
+    opacity: 0;
+    transition: 0.5s;
+    animation: animate 2s ease-in-out infinite;
+}
+
+.container .box:hover span::before {
+    top: -50px;
+    left: 50px;
+    width: 100px;
+    height: 100px;
+    opacity: 1;
+}
+
+.guide{
+    position: absolute;
+    top:10%;
+    color: rgba(55, 63, 71, 0.962);
+}
+
+.label{
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    line-height: 1.2em;
+}
+
+/* 设置勾选框的基本样式 */
+.checkbox {
+    appearance: none;  /* 取消默认样式 */
+    width: 20px;  /* 宽度 */
+    height: 20px;  /* 高度 */
+    background-color: #f1f1f1;  /* 背景色 */
+    border: 2px solid #aaa;  /* 边框 */
+    border-radius: 4px;  /* 圆角 */
+    margin-right: 10px;  /* 右边距 */
+    vertical-align: middle;  /* 垂直居中 */
+    cursor: pointer;  /* 鼠标样式 */
+    transition: all 0.3s;  /* 过渡效果 */
+    margin-bottom: 4px;
+  }
+  
+  /* 当鼠标悬停时的勾选框样式 */
+  .checkbox:hover {
+    border-color: #666;  /* 深色边框 */
+    background-color: #e9e9e9;  /* 深色背景 */
+  }
+  
+  /* 当勾选框被选中时的样式 */
+  .checkbox:checked {
+    background-color: #4CAF50;  /* 绿色背景 */
+    border-color: #4CAF50;  /* 绿色边框 */
+  }
+  
+  /* 可以进一步添加一个勾选标志，当勾选框被选中时显示 */
+  .checkbox:checked:after {
+    content: '\2713';  /* 勾选标志的 Unicode 字符 */
+    font-size: 16px;  /* 字体大小 */
+    color: #fff;  /* 字体颜色 */
+    text-align: center;  /* 水平居中 */
+    display: block;  /* 块级显示 */
+  }
+
+@keyframes animate {
+    0%,
+    100% {
+        transform: translateY(10px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.container .box span::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: 0.5s;
+    animation: animate 2s ease-in-out infinite;
+    animation-delay: -1s;
+}
+
+.container .box:hover span::after {
+    bottom: -50px;
+    right: 50px;
+    width: 100px;
+    height: 100px;
+    opacity: 1;
+}
+
+.container .box .content {
+    z-index: 1;
+    position: relative;
+    left: 0;
+    color: rgba(55, 63, 71, 0.93);
+    padding: 20px 40px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    transition: 0.5s;
+    width:140%;
+    height:115%;
+}
+
+.container .box:hover .content {
+    left: -25px;
+    padding: 60px 40px;
+}
+
+.container .box .content h2 {
+    font-size: 1.4em;
+    color: rgba(57, 70, 84, 0.93);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.container .box .content p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    line-height: 1.2em;
+}
+
+.container .box .content a {
+    color: #111;
+    background-color: rgba(57, 70, 84, 0.93);
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+#nextButton {
+    background-color: #0d6f82e1;  /* 按钮的背景颜色 */
+    color: #ffffff;             /* 按钮上文本的颜色 */
+    padding: 10px 20px;         /* 按钮的内边距 */
+    border: none;               /* 移除默认的边框 */
+    border-radius: 10px;         /* 设置圆角 */
+    font-size: 16px;            /* 字体大小 */
+    font-weight: bold;
+    cursor: pointer;            /* 鼠标悬停时的指针形状 */
+    display: block;             /* 使其成为块级元素 */
+    margin: 20px auto;          /* 上下外边距为20px，左右自动居中 */
+    transition: background 0.3s ease;  /* 过渡效果 */
+    position:absolute;
+    bottom: 0%;
+    right:50%;
+    box-shadow: 5px 5px 10px 1px #538089;
+    width: 150px;
+    height: 50px;
+  }
+
+  /* 鼠标悬停时的样式 */
+  #nextButton:hover {
+    background-color: #0e496ce9;  /* 深蓝色 */
+  }
+
+  /* 鼠标点击时的样式 */
+  #nextButton:active {
+    background-color: #031a2a;  /* 更深的蓝色 */
+    transform: scale(0.95);     /* 轻微缩放效果 */
+  }
